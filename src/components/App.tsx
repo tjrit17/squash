@@ -1,84 +1,78 @@
-import { VFC, useState } from 'react'
+import { VFC, useState, useEffect } from 'react'
 import styled from 'styled-components'
+import { OpPanel } from './OpPanel'
+import { SIZES_PX, COLORS, OTHERS } from './../constants'
+import { useBallCtl } from './../hooks/useBallCtl'
+import { RacketAria } from './RacketAria'
+import { Sball } from './Sball'
 
 export const App: VFC = () => {
-  const [raketPosX, setRaketPosX] = useState<number>(325)
-  const [ballPos, setBallPos] = useState({ x: 0, y: 0 })
-  const [startFlg, setStartFlg] = useState<boolean>(false)
+  const [startFlag, setStartFlag] = useState<boolean>(false)
+  const [raketPosX, setRaketPosX] = useState<number>(
+    SIZES_PX.RACKET_MV_WIDTH / 2
+  )
+  const { ballPos, calcMvBallPos } = useBallCtl()
+  const [ballColor, setBallColor] = useState(COLORS.BALL)
 
-  const onClickLeftBtn = () => {
-    setRaketPosX((c) => (c - 25 < 0 ? 0 : c - 25))
-    console.log(raketPosX)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (startFlag) {
+        calcMvBallPos(raketPosX, stStartFlag)
+      }
+    }, OTHERS.INTERVAL)
+    return () => clearInterval(interval)
+  })
+
+  const stStartFlag = (bl: boolean) => {
+    if (bl === false) {
+      setBallColor('black')
+    } else {
+      setBallColor(COLORS.BALL)
+    }
+    setStartFlag(bl)
   }
-  const onClickRightBtn = () => {
-    setRaketPosX((c) => (c + 25 > 650 ? 650 : c + 25))
-    console.log(raketPosX)
-  }
-  const onClickStart = () => {
-    setStartFlg(true)
-  }
-  const onClickStop = () => {
-    setStartFlg(false)
+  const stRaketPosX = (n: number) => {
+    setRaketPosX(n)
   }
 
   return (
-    <div>
+    <>
       <Sh1>SQUASH</Sh1>
       <CourtBox>
-        <br />
-        <RacketBar
-          style={{ margin: 'auto auto 10px ' + raketPosX + 'px' }}
-        ></RacketBar>
-        <Sball></Sball>
+        <Sball ballPos={ballPos} ballColor={ballColor}>
+          ●
+        </Sball>
       </CourtBox>
-      <SwPanel>
-        <Sbutton onClick={onClickLeftBtn}>&lt;</Sbutton>
-        <Sbutton onClick={onClickRightBtn}>&gt;</Sbutton>
-        <Sbutton onClick={onClickStart}>START</Sbutton>
-        <Sbutton onClick={onClickStop}>STOP</Sbutton>
-      </SwPanel>
-    </div>
+      <RacketAria raketPosX={raketPosX}></RacketAria>
+      <OpPanel
+        raketPosX={raketPosX}
+        stRaketPosX={stRaketPosX}
+        startFlag={startFlag}
+        stStartFlag={stStartFlag}
+      ></OpPanel>
+    </>
   )
 }
-const Sball = styled.div`
-  border: 2px solid black;
-`
-const RacketBar = styled.div`
-  height: 10px;
-  width: 50px;
-  background-color: blue;
-  margin-top: auto;
-  margin-right: auto;
-  margin-bottom: auto;
-  border: none;
-`
-
-const Sbutton = styled.button`
-  width: 80px;
-  height: 20px;
-  margin: 5px 10px 10px 5px;
-`
-
-const CourtBox = styled.div`
-  margin: 0px auto 0px auto;
-  border: 5px solid gray;
-  width: 700px;
-  height: 500px;
-  display: flex;
-`
 
 const Sh1 = styled.h1`
+  width: ${SIZES_PX.COURT_WIDTH}px;
   text-align: center;
-  background-color: #7f806a;
-  width: 700px;
-  border: 5px solid #7f806a;
+  border-bottom: none;
   margin: 0px auto 0px auto;
-  margin-bottom: 0px;
-`
 
-const SwPanel = styled.div`
+  color: ${COLORS.TITLE_TEXT};
+  text-shadow: 0.04em 0.02em 0 #b0bec5, 0.08em 0.05em 0 rgba(0, 0, 0, 0.6);
+
+  background-color: ${COLORS.TITLE_BACK};
+  border: ${SIZES_PX.WALL}px solid ${COLORS.COURT};
+  box-shadow: 2px 2px 2px 0px rgba(255, 255, 255, 0.25) inset,
+    -2px -2px 2px 0px rgba(0, 0, 0, 0.3) inset;
+`
+const CourtBox = styled.div`
+  width: ${SIZES_PX.COURT_WIDTH}px;
+  height: ${SIZES_PX.COURT_HIGHT}px;
   margin: 0px auto 0px auto;
-  border: 5px solid gray;
-  width: 700px;
-  height: 100px;
+  border: ${SIZES_PX.WALL}px solid ${COLORS.COURT};
+  border-bottom: none;
+  display: flex;
 `
