@@ -1,7 +1,9 @@
-import styled from 'styled-components'
+// 操作パネルと操作した時の処理を表示する
+
 import { VFC } from 'react'
-import { SIZES_PX, COLORS } from '../constants'
-import { Sbutton } from './Sbutton'
+import styled from 'styled-components'
+import { SIZES_PX, COLORS } from '../../constants'
+import { Bbutton } from '../basic/Bbutton'
 
 type Props = {
   raketPosX: number
@@ -10,7 +12,7 @@ type Props = {
   stStartFlag: (bl: boolean) => void
 }
 
-export const OpPanel: VFC<Props> = (props) => {
+export const PPanel: VFC<Props> = (props) => {
   const { raketPosX, stRaketPosX, startFlag, stStartFlag } = props
 
   const onClickLeftBtn = () => {
@@ -37,21 +39,31 @@ export const OpPanel: VFC<Props> = (props) => {
   const onClickStop = () => {
     stStartFlag(false)
   }
+
+  const BbuttonStyle = {
+    sWidth: SIZES_PX.BUTTON + 'px',
+    sMargin: '5px 10px 10px 5px',
+    sBgColor: '#ececec',
+  }
+
   return (
     <SwPanel>
-      <Sbutton onClickBtn={onClickLeftBtn}>{`<`}</Sbutton>
-      <Sbutton onClickBtn={onClickRightBtn}>{`>`}</Sbutton>
-      <Sbutton onClickBtn={onClickStart}>START</Sbutton>
-      <Sbutton onClickBtn={onClickStop}>STOP</Sbutton>
+      <Bbutton onClickBtn={onClickLeftBtn} {...BbuttonStyle}>{`<`}</Bbutton>
+      <Bbutton onClickBtn={onClickRightBtn} {...BbuttonStyle}>{`>`}</Bbutton>
+      <Bbutton onClickBtn={onClickStart} {...BbuttonStyle}>
+        START
+      </Bbutton>
+      <Bbutton onClickBtn={onClickStop} {...BbuttonStyle}>
+        STOP
+      </Bbutton>
     </SwPanel>
   )
 }
 
 const SwPanel = styled.div`
-  color: #168108;
-  background: ${COLORS.COURT};
   margin: 0px auto 0px auto;
-  border: ${SIZES_PX.WALL}px solid ${COLORS.COURT};
   width: ${SIZES_PX.COURT_WIDTH}px;
+  background: ${COLORS.WALL};
+  border: ${SIZES_PX.WALL}px solid ${COLORS.WALL};
   height: 30px;
 `
