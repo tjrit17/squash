@@ -1,6 +1,6 @@
 // 操作パネルと操作した時の処理を表示する
 
-import { VFC } from 'react'
+import { VFC, useCallback, memo } from 'react'
 import styled from 'styled-components'
 import { SIZES_PX, COLORS } from '../../constants'
 import { Bbutton } from '../basic/Bbutton'
@@ -12,10 +12,10 @@ type Props = {
   stStartFlag: (bl: boolean) => void
 }
 
-export const PPanel: VFC<Props> = (props) => {
+export const PpanelAria: VFC<Props> = memo((props) => {
   const { raketPosX, stRaketPosX, startFlag, stStartFlag } = props
 
-  const onClickLeftBtn = () => {
+  const onClickLeftBtn = useCallback(() => {
     if (startFlag) {
       stRaketPosX(
         raketPosX - SIZES_PX.RACKET_MOVE < 0
@@ -23,8 +23,9 @@ export const PPanel: VFC<Props> = (props) => {
           : raketPosX - SIZES_PX.RACKET_MOVE
       )
     }
-  }
-  const onClickRightBtn = () => {
+  }, [raketPosX, stRaketPosX, startFlag])
+
+  const onClickRightBtn = useCallback(() => {
     if (startFlag) {
       stRaketPosX(
         raketPosX + SIZES_PX.RACKET_MOVE > SIZES_PX.RACKET_MV_WIDTH
@@ -32,13 +33,15 @@ export const PPanel: VFC<Props> = (props) => {
           : raketPosX + SIZES_PX.RACKET_MOVE
       )
     }
-  }
-  const onClickStart = () => {
+  }, [raketPosX, stRaketPosX, startFlag])
+
+  const onClickStart = useCallback(() => {
     stStartFlag(true)
-  }
-  const onClickStop = () => {
+  }, [stStartFlag])
+
+  const onClickStop = useCallback(() => {
     stStartFlag(false)
-  }
+  }, [stStartFlag])
 
   const BbuttonStyle = {
     sWidth: SIZES_PX.BUTTON + 'px',
@@ -58,7 +61,7 @@ export const PPanel: VFC<Props> = (props) => {
       </Bbutton>
     </SwPanel>
   )
-}
+})
 
 const SwPanel = styled.div`
   margin: 0px auto 0px auto;

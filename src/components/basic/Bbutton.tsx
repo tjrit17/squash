@@ -1,4 +1,4 @@
-import { VFC } from 'react'
+import { VFC, memo } from 'react'
 import styled from 'styled-components'
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
   sBgColor: string
 }
 
-export const Bbutton: VFC<Props> = (props) => {
+export const Bbutton: VFC<Props> = memo((props) => {
   const { onClickBtn, children, sWidth, sMargin, sBgColor } = props
   const sBbuttonlStyle = {
     width: sWidth,
@@ -22,10 +22,11 @@ export const Bbutton: VFC<Props> = (props) => {
       {children}
     </SBbutton>
   )
-}
+})
+
+// export default memo(Bbutton)
 
 const SBbutton = styled.button`
-  /* color: #dbd9d9; */
   font-family: sans-serif;
   font-weight: bold;
   height: 22px;

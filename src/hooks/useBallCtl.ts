@@ -1,5 +1,4 @@
-// ボールがラケットにあたったかの判定と跳ね返りを計算する
-
+// ボール位置をコントロールする
 import { useCallback, useState } from 'react'
 import { SIZES_PX } from './../constants'
 
@@ -17,7 +16,7 @@ export const useBallCtl = () => {
       } else if (ballPos.y >= SIZES_PX.BALL_MV_HEIGHT) {
         ballDirection.y = ballDirection.y * -1
         if (
-          raketPosX > ballPos.x + SIZES_PX.BALL ||
+          raketPosX > ballPos.x + SIZES_PX.BALL_DISP ||
           raketPosX + SIZES_PX.RACKET_WIDTH < ballPos.x
         ) {
           stStartFlag(false)

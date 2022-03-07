@@ -1,6 +1,6 @@
 // タイトルバーを表示する
 
-import { VFC } from 'react'
+import { VFC, memo } from 'react'
 import styled from 'styled-components'
 import { SIZES_PX, COLORS } from '../../constants'
 
@@ -8,12 +8,13 @@ type Props = {
   children: React.ReactNode
 }
 
-export const Ptitle: VFC<Props> = (props) => {
+export const PtitleAria: VFC<Props> = memo((props) => {
   const { children } = props
-  return <SPtitle>{children}</SPtitle>
-}
 
-const SPtitle = styled.h1`
+  return <SPtitleAria>{children}</SPtitleAria>
+})
+
+const SPtitleAria = styled.h1`
   margin: 0px auto 0px auto;
   width: ${SIZES_PX.COURT_WIDTH}px;
   text-align: center;

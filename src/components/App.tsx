@@ -1,37 +1,30 @@
 // メインルーチン
 
-import { VFC, useState, useEffect } from 'react'
-import { SIZES_PX, COLORS, OTHERS } from './../constants'
-import { Ptitle } from './parts/Ptitle'
-import { PCourtBox } from './parts/PCourtBox'
+import { VFC, useState, useEffect, useCallback, useMemo } from 'react'
+import { SIZES_PX, OTHERS } from './../constants'
+import { PtitleAria } from './parts/PtitleAria'
+import { PCourtAria } from './parts/PCourtAria'
 import { PracketAria } from './parts/PracketAria'
-import { PPanel } from './parts/PPanel'
+import { PpanelAria } from './parts/PpanelAria'
 import { useBallCtl } from './../hooks/useBallCtl'
+import { useStartStopCtl } from './../hooks/useStartStopCtl'
 
 export const App: VFC = () => {
-  // スタート・ストップフラグの定義
-  const [startFlag, setStartFlag] = useState<boolean>(false)
-  const stStartFlag = (bl: boolean) => {
-    if (bl === false) {
-      setBallColor('black')
-    } else {
-      setBallColor(COLORS.BALL)
-    }
-    setStartFlag(bl)
-  }
-
   // ラケットの位置の定義
   const [raketPosX, setRaketPosX] = useState<number>(
     SIZES_PX.RACKET_MV_WIDTH / 2
   )
-  const stRaketPosX = (n: number) => {
+  const stRaketPosX = useCallback((n: number) => {
     setRaketPosX(n)
-  }
+  }, [])
 
+  // スタート・ストップをコントロールする
+  const { ballColor, startFlag, stStartFlag } = useStartStopCtl()
+
+  // ボール位置をコントロールする
   const { ballPos, calcMvBallPos } = useBallCtl()
-  const [ballColor, setBallColor] = useState(COLORS.BALL)
 
-  // 一定間隔でタイマー処理を行う
+  // 一定の時間が経過する毎にボールを動かす
   useEffect(() => {
     const interval = setInterval(() => {
       if (startFlag) {
@@ -44,15 +37,15 @@ export const App: VFC = () => {
   // 全体表示
   return (
     <>
-      <Ptitle>SQUASH</Ptitle>
-      <PCourtBox ballPos={ballPos} ballColor={ballColor}></PCourtBox>
+      <PtitleAria>SQUASH</PtitleAria>
+      <PCourtAria ballPos={ballPos} ballColor={ballColor}></PCourtAria>
       <PracketAria raketPosX={raketPosX}></PracketAria>
-      <PPanel
+      <PpanelAria
         raketPosX={raketPosX}
         stRaketPosX={stRaketPosX}
         startFlag={startFlag}
         stStartFlag={stStartFlag}
-      ></PPanel>
+      ></PpanelAria>
     </>
   )
 }
