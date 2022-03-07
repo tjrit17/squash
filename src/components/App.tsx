@@ -1,30 +1,21 @@
 // メインルーチン
 
-import { VFC, useState, useEffect, useCallback, useMemo } from 'react'
-import { SIZES_PX, OTHERS } from './../constants'
+import { VFC, useEffect } from 'react'
+import styled from 'styled-components'
+import { SIZES_PX, COLORS, OTHERS } from './../constants'
 import { PtitleAria } from './parts/PtitleAria'
 import { PCourtAria } from './parts/PCourtAria'
 import { PracketAria } from './parts/PracketAria'
 import { PpanelAria } from './parts/PpanelAria'
 import { useBallCtl } from './../hooks/useBallCtl'
 import { useStartStopCtl } from './../hooks/useStartStopCtl'
+import { useRacketCtl } from '../hooks/useRacketCtl'
 
 export const App: VFC = () => {
-  // ラケットの位置の定義
-  const [raketPosX, setRaketPosX] = useState<number>(
-    SIZES_PX.RACKET_MV_WIDTH / 2
-  )
-  const stRaketPosX = useCallback((n: number) => {
-    setRaketPosX(n)
-  }, [])
-
-  // スタート・ストップをコントロールする
+  const { raketPosX, stRaketPosX } = useRacketCtl()
   const { ballColor, startFlag, stStartFlag } = useStartStopCtl()
-
-  // ボール位置をコントロールする
   const { ballPos, calcMvBallPos } = useBallCtl()
 
-  // 一定の時間が経過する毎にボールを動かす
   useEffect(() => {
     const interval = setInterval(() => {
       if (startFlag) {
@@ -34,18 +25,25 @@ export const App: VFC = () => {
     return () => clearInterval(interval)
   })
 
-  // 全体表示
   return (
-    <>
+    <SMainContainer>
       <PtitleAria>SQUASH</PtitleAria>
-      <PCourtAria ballPos={ballPos} ballColor={ballColor}></PCourtAria>
-      <PracketAria raketPosX={raketPosX}></PracketAria>
+      <PCourtAria ballPos={ballPos} ballColor={ballColor} />
+      <PracketAria raketPosX={raketPosX} />
       <PpanelAria
         raketPosX={raketPosX}
         stRaketPosX={stRaketPosX}
         startFlag={startFlag}
         stStartFlag={stStartFlag}
-      ></PpanelAria>
-    </>
+      />
+    </SMainContainer>
   )
 }
+
+const SMainContainer = styled.div`
+  margin: 0px;
+  padding: 0px;
+  width: ${SIZES_PX.COURT_WIDTH}px;
+  border: ${SIZES_PX.WALL}px solid ${COLORS.WALL};
+  background-color: ${COLORS.WALL};
+`

@@ -13,19 +13,18 @@ export const Pball: VFC<Props> = (props) => {
   const { ballPos, ballColor } = props
 
   const PBallStyle = {
-    transform:
-      'translateX(' + ballPos.x + 'px) translateY(' + ballPos.y + 'px)',
+    transform: `translateX(${ballPos.x}px) translateY(${ballPos.y}px)`,
     background: ballColor,
   }
 
-  return <SPball style={PBallStyle}></SPball>
+  return <SPball style={PBallStyle} />
 }
 
 const SPball = styled.div`
   width: ${SIZES_PX.BALL_DISP}px;
   height: ${SIZES_PX.BALL_DISP}px;
   background-clip: padding-box;
-  border-radius: ${SIZES_PX.BALL / 2 + 3}px;
+  border-radius: ${SIZES_PX.BALL_OUTLINE / 2 + 3}px;
   border: ${SIZES_PX.BALL_SPC}px solid ${COLORS.FLOOR};
-  margin: ${1 - SIZES_PX.BALL_SPC}px auto auto ${1 - SIZES_PX.BALL_SPC}px;
+  margin: 0px auto auto 0px;
 `

@@ -44,29 +44,32 @@ export const PpanelAria: VFC<Props> = memo((props) => {
   }, [stStartFlag])
 
   const BbuttonStyle = {
-    sWidth: SIZES_PX.BUTTON + 'px',
-    sMargin: '5px 10px 10px 5px',
-    sBgColor: '#ececec',
+    sWidth: `${SIZES_PX.BUTTON}px`,
+    sMargin: `10px 10px 10px 5px`,
+    sBgColor: `#ececec`,
   }
 
   return (
-    <SwPanel>
-      <Bbutton onClickBtn={onClickLeftBtn} {...BbuttonStyle}>{`<`}</Bbutton>
-      <Bbutton onClickBtn={onClickRightBtn} {...BbuttonStyle}>{`>`}</Bbutton>
+    <SPpanel>
+      <Bbutton onClickBtn={onClickLeftBtn} {...BbuttonStyle}>
+        {`<`}
+      </Bbutton>
+      <Bbutton onClickBtn={onClickRightBtn} {...BbuttonStyle}>
+        {`>`}
+      </Bbutton>
       <Bbutton onClickBtn={onClickStart} {...BbuttonStyle}>
         START
       </Bbutton>
       <Bbutton onClickBtn={onClickStop} {...BbuttonStyle}>
         STOP
       </Bbutton>
-    </SwPanel>
+    </SPpanel>
   )
 })
 
-const SwPanel = styled.div`
+const SPpanel = styled.div`
+  width: 100%;
+  height: 35px;
   margin: 0px auto 0px auto;
-  width: ${SIZES_PX.COURT_WIDTH}px;
   background: ${COLORS.WALL};
-  border: ${SIZES_PX.WALL}px solid ${COLORS.WALL};
-  height: 30px;
 `

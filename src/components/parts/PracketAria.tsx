@@ -11,27 +11,25 @@ type Props = {
 export const PracketAria: VFC<Props> = memo((props) => {
   const { raketPosX } = props
 
-  const racketBarStyle = {
-    transform: 'translateX(' + raketPosX + 'px) ',
+  const SracketBarStyle = {
+    transform: `translateX(${raketPosX}px) `,
   }
 
   return (
     <SPracketAria>
-      <RacketBar style={racketBarStyle}></RacketBar>
+      <SracketBar style={SracketBarStyle} />
     </SPracketAria>
   )
 })
 
 const SPracketAria = styled.div`
-  margin: 0px auto 0px auto;
-  width: ${SIZES_PX.COURT_WIDTH}px;
+  width: 100%;
   height: 20px;
+  margin: 0px auto 0px auto;
   padding-top: 3px;
-  border-left: ${SIZES_PX.WALL}px solid ${COLORS.WALL};
-  border-right: ${SIZES_PX.WALL}px solid ${COLORS.WALL};
   background-color: ${COLORS.FLOOR};
 `
-const RacketBar = styled.div`
+const SracketBar = styled.div`
   width: ${SIZES_PX.RACKET_WIDTH}px;
   height: 10px;
   background-color: ${COLORS.RACKET};

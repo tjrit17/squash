@@ -1,19 +1,19 @@
-// パーツのサイズを指定
+// 画面パーツのサイズを指定
 export class SIZES_PX {
-  static readonly BALL = 24
-  static readonly BALL_SPC = 2
-  static readonly BALL_DISP = this.BALL - this.BALL_SPC * 2
-  static readonly WALL = 7
   static readonly COURT_WIDTH = 340
   static readonly COURT_HIGHT = 270
+  static readonly BALL_DISP = 22
+  static readonly WALL = 7
   static readonly RACKET_WIDTH = 100
   static readonly RACKET_MOVE = 25
   static readonly BUTTON = 70
+
+  static readonly BALL_SPC = 2
+  static readonly BALL_OUTLINE = this.BALL_DISP + this.BALL_SPC * 2
   static readonly RACKET_MV_WIDTH = this.COURT_WIDTH - this.RACKET_WIDTH
-  static readonly BALL_MV_WIDTH =
-    this.COURT_WIDTH - this.BALL + this.BALL_SPC * 2 - 1
+  static readonly BALL_MV_WIDTH = this.COURT_WIDTH - this.BALL_OUTLINE
   static readonly BALL_MV_HEIGHT =
-    this.COURT_HIGHT - this.BALL + this.BALL_SPC * 3 - 1
+    this.COURT_HIGHT - this.BALL_OUTLINE + this.BALL_SPC * 3 - 1
 }
 
 // 色を指定
@@ -28,5 +28,5 @@ export class COLORS {
 
 // ボール移動のタイマーの時間（ミリ秒単位）
 export class OTHERS {
-  static readonly INTERVAL = 15
+  static readonly INTERVAL = 5
 }

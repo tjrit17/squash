@@ -1,4 +1,4 @@
-// ボール位置をコントロールする
+// ボール位置のコントロール
 import { useCallback, useState } from 'react'
 import { SIZES_PX } from './../constants'
 

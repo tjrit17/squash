@@ -14,18 +14,16 @@ export const PCourtAria: VFC<Props> = (props) => {
   const { ballPos, ballColor } = props
 
   return (
-    <SCourtAria>
-      <Pball ballPos={ballPos} ballColor={ballColor}></Pball>
-    </SCourtAria>
+    <SPcourtAria>
+      <Pball ballPos={ballPos} ballColor={ballColor} />
+    </SPcourtAria>
   )
 }
 
-const SCourtAria = styled.div`
-  margin: 0px auto 0px auto;
-  width: ${SIZES_PX.COURT_WIDTH}px;
+const SPcourtAria = styled.div`
+  width: 100%;
   height: ${SIZES_PX.COURT_HIGHT}px;
-  border: ${SIZES_PX.WALL}px solid ${COLORS.WALL};
+  margin: 0px auto 0px auto;
   background-color: ${COLORS.FLOOR};
-  border-bottom: none;
   display: flex;
 `

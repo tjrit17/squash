@@ -1,4 +1,4 @@
-// スタート・ストップをコントロールする
+// スタート・ストップのコントロール
 import { useCallback, useState } from 'react'
 import { COLORS } from './../constants'
 
