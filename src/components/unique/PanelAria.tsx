@@ -1,9 +1,7 @@
-// 操作パネルと操作した時の処理を表示する
-
 import { VFC, useCallback, memo } from 'react'
 import styled from 'styled-components'
 import { SIZES_PX, COLORS } from '../../constants'
-import { Bbutton } from '../basic/Bbutton'
+import { BasicButton } from '../common/BasicButton'
 
 type Props = {
   raketPosX: number
@@ -12,7 +10,7 @@ type Props = {
   stStartFlag: (bl: boolean) => void
 }
 
-export const PpanelAria: VFC<Props> = memo((props) => {
+export const PanelAria: VFC<Props> = memo((props) => {
   const { raketPosX, stRaketPosX, startFlag, stStartFlag } = props
 
   const onClickLeftBtn = useCallback(() => {
@@ -43,31 +41,31 @@ export const PpanelAria: VFC<Props> = memo((props) => {
     stStartFlag(false)
   }, [stStartFlag])
 
-  const BbuttonStyle = {
-    sWidth: `${SIZES_PX.BUTTON}px`,
+  const BasicButtonStyle = {
+    sWidth: `${SIZES_PX.BUTTON_WIDTH}px`,
     sMargin: `10px 10px 10px 5px`,
     sBgColor: `#ececec`,
   }
 
   return (
-    <SPpanel>
-      <Bbutton onClickBtn={onClickLeftBtn} {...BbuttonStyle}>
+    <SPanelArea>
+      <BasicButton onClickBtn={onClickLeftBtn} {...BasicButtonStyle}>
         {`<`}
-      </Bbutton>
-      <Bbutton onClickBtn={onClickRightBtn} {...BbuttonStyle}>
+      </BasicButton>
+      <BasicButton onClickBtn={onClickRightBtn} {...BasicButtonStyle}>
         {`>`}
-      </Bbutton>
-      <Bbutton onClickBtn={onClickStart} {...BbuttonStyle}>
+      </BasicButton>
+      <BasicButton onClickBtn={onClickStart} {...BasicButtonStyle}>
         START
-      </Bbutton>
-      <Bbutton onClickBtn={onClickStop} {...BbuttonStyle}>
+      </BasicButton>
+      <BasicButton onClickBtn={onClickStop} {...BasicButtonStyle}>
         STOP
-      </Bbutton>
-    </SPpanel>
+      </BasicButton>
+    </SPanelArea>
   )
 })
 
-const SPpanel = styled.div`
+const SPanelArea = styled.div`
   width: 100%;
   height: 35px;
   margin: 0px auto 0px auto;

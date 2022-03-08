@@ -1,4 +1,4 @@
-// ラケットの位置のコントロール
+// ラケット位置コントロール
 import { useCallback, useState } from 'react'
 import { SIZES_PX } from './../constants'
 

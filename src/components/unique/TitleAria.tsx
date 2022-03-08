@@ -1,5 +1,3 @@
-// タイトルバーを表示する
-
 import { VFC, memo } from 'react'
 import styled from 'styled-components'
 import { SIZES_PX, COLORS } from '../../constants'
@@ -8,17 +6,17 @@ type Props = {
   children: React.ReactNode
 }
 
-export const PtitleAria: VFC<Props> = memo((props) => {
+export const TitleAria: VFC<Props> = memo((props) => {
   const { children } = props
 
-  return <SPtitleAria>{children}</SPtitleAria>
+  return <STitleAria>{children}</STitleAria>
 })
 
-const SPtitleAria = styled.h1`
+const STitleAria = styled.h1`
   width: 100%;
   margin: 0px auto 0px auto;
   background-color: ${COLORS.TITLE_BACK};
-  border-bottom: ${SIZES_PX.WALL}px solid ${COLORS.WALL};
+  border-bottom: ${SIZES_PX.WALL_THICKNESS}px solid ${COLORS.WALL};
   box-shadow: 2px 2px 2px 0px rgba(255, 255, 255, 0.25) inset,
     -2px -2px 2px 0px rgba(0, 0, 0, 0.3) inset;
   text-align: center;

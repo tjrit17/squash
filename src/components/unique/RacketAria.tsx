@@ -1,5 +1,3 @@
-// ラケットを表示する
-
 import { VFC, memo } from 'react'
 import styled from 'styled-components'
 import { SIZES_PX, COLORS } from '../../constants'
@@ -8,28 +6,26 @@ type Props = {
   raketPosX: number
 }
 
-export const PracketAria: VFC<Props> = memo((props) => {
+export const RacketAria: VFC<Props> = memo((props) => {
   const { raketPosX } = props
-
-  const SracketBarStyle = {
+  const SRacketBarStyle = {
     transform: `translateX(${raketPosX}px) `,
   }
-
   return (
-    <SPracketAria>
-      <SracketBar style={SracketBarStyle} />
-    </SPracketAria>
+    <SRacketAria>
+      <SRacketBar style={SRacketBarStyle} />
+    </SRacketAria>
   )
 })
 
-const SPracketAria = styled.div`
+const SRacketAria = styled.div`
   width: 100%;
   height: 20px;
   margin: 0px auto 0px auto;
   padding-top: 3px;
   background-color: ${COLORS.FLOOR};
 `
-const SracketBar = styled.div`
+const SRacketBar = styled.div`
   width: ${SIZES_PX.RACKET_WIDTH}px;
   height: 10px;
   background-color: ${COLORS.RACKET};

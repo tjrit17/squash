@@ -9,24 +9,22 @@ type Props = {
   sBgColor: string
 }
 
-export const Bbutton: VFC<Props> = memo((props) => {
+export const BasicButton: VFC<Props> = memo((props) => {
   const { onClickBtn, children, sWidth, sMargin, sBgColor } = props
-  const sBbuttonlStyle = {
+  const sBasicButtonlStyle = {
     width: sWidth,
     margin: sMargin,
     background: sBgColor,
   }
 
   return (
-    <SBbutton style={sBbuttonlStyle} onClick={onClickBtn}>
+    <SBasicButton style={sBasicButtonlStyle} onClick={onClickBtn}>
       {children}
-    </SBbutton>
+    </SBasicButton>
   )
 })
 
-// export default memo(Bbutton)
-
-const SBbutton = styled.button`
+const SBasicButton = styled.button`
   font-family: sans-serif;
   font-weight: bold;
   height: 22px;
